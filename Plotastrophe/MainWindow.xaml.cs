@@ -20,9 +20,13 @@ namespace Plotastrophe
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        PlotCanvas plotCanvas;
+
         public MainWindow()
         {
             InitializeComponent();
+            plotCanvas = new PlotCanvas(canvas);
         }
     }
 }
