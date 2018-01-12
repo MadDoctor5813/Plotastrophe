@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Plotastrophe"
         mc:Ignorable="d"
-        Title="Plotastrophe" Height="720" Width="1024">
-    <Canvas Name="canvas" Height="720" Width="1024" Background="White">
-    </Canvas>
+        Title="Plotastrophe" Height="1024" Width="1024">
+    <Border Name="canvasBorder" BorderBrush="Bisque" BorderThickness="2" Height="750" Width="750">
+        <Canvas Height="750" Width="750" Name="canvas" Background="White" ClipToBounds="True"></Canvas>
+    </Border>
 </Window>
