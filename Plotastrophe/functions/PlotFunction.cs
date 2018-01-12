@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Shapes;
 
 namespace Plotastrophe.functions
@@ -22,9 +23,12 @@ namespace Plotastrophe.functions
 
         private const double DX = 0.1;
 
-        public PlotFunction()
+        private Func<Point, Point> transform;
+
+        public PlotFunction(Func<Point, Point> transform)
         {
             Polyline = new Polyline();
+            this.transform = transform;
             //basic appearance for now
             Polyline.Stroke = System.Windows.Media.Brushes.Bisque;
             Polyline.StrokeThickness = 2;
@@ -38,7 +42,7 @@ namespace Plotastrophe.functions
             Polyline.Points.Clear();
             for (double i = Start; i < End; i += DX)
             {
-                Polyline.Points.Add(new System.Windows.Point(i, Evaluate(i)));
+                Polyline.Points.Add(transform(new Point(i, Evaluate(i))));
             }
         }
 
