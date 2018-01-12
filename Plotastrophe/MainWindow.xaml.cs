@@ -28,5 +28,30 @@ namespace Plotastrophe
             InitializeComponent();
             plotCanvas = new PlotCanvas(canvas);
         }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                plotCanvas.SelectMode = PlotCanvas.SelectionState.None;
+                selectModeText.Text = "Selection Mode: None";
+            }
+            if (e.Key == Key.T)
+            {
+                plotCanvas.SelectMode = PlotCanvas.SelectionState.Translate;
+                selectModeText.Text = "Selection Mode: Translate";
+            }
+            if (e.Key == Key.S)
+            {
+                plotCanvas.SelectMode = PlotCanvas.SelectionState.Scale;
+                selectModeText.Text = "Selection Mode: Scale";
+            }
+            if (e.Key == Key.R)
+            {
+                plotCanvas.SelectMode = PlotCanvas.SelectionState.Restrictions;
+                selectModeText.Text = "Selection Mode: Restrictions";
+            }
+        }
+
     }
 }

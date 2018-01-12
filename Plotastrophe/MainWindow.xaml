@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:Plotastrophe"
         mc:Ignorable="d"
         Title="Plotastrophe" Height="1024" Width="1024">
-    <Border Name="canvasBorder" BorderBrush="Bisque" BorderThickness="2" Height="750" Width="750">
-        <Canvas Height="750" Width="750" Name="canvas" Background="White" ClipToBounds="True"></Canvas>
-    </Border>
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Name="canvasBorder" BorderBrush="Bisque" BorderThickness="2" Height="750" Width="750" VerticalAlignment="Top">
+            <Canvas Height="750" Width="750" Name="canvas" Background="White" ClipToBounds="True"></Canvas>
+        </Border>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="selectModeText" FontSize="20" Text="Selection Mode: None"/>
+            </StatusBarItem>
+        </StatusBar>
+    </DockPanel>
 </Window>

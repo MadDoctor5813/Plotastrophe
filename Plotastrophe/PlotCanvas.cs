@@ -10,8 +10,18 @@ using System.Windows.Shapes;
 
 namespace Plotastrophe
 {
+
+
     class PlotCanvas
     {
+
+        public enum SelectionState
+        {
+            None,
+            Translate,
+            Scale,
+            Restrictions
+        }
 
         private Canvas mCanvas;
 
@@ -19,6 +29,7 @@ namespace Plotastrophe
 
         private List<PlotFunction> functions;
 
+        public SelectionState SelectMode { get; set; } = SelectionState.None;
         private PlotFunction selected = null;
 
         public PlotCanvas(Canvas canvas)
