@@ -19,23 +19,31 @@ namespace Plotastrophe
 
         private List<PlotFunction> functions;
 
+        private PlotFunction selected = null;
+
         public PlotCanvas(Canvas canvas)
         {
             mCanvas = canvas;
             functions = new List<PlotFunction>();
-            for (int i = 0; i < 40; i++)
-            {
-                LinearFunction func = new LinearFunction(ToCanvasCoords);
-                func.A = new Random().Next(2);
-                AddFunction(func);
-                func.RegenShape();
-            }
+            LinearFunction l1 = new LinearFunction(this);
+            LinearFunction l2 = new LinearFunction(this);
+            l2.A = 3;
+            l2.RegenShape();
+            AddFunction(l1);
+            AddFunction(l2);
         }
 
         private void AddFunction(PlotFunction function)
         {
             functions.Add(function);
             mCanvas.Children.Add(function.Polyline);
+        }
+
+        public void Select(PlotFunction func)
+        {
+            func.SetSelected(true);
+            selected?.SetSelected(false);
+            selected = func;
         }
 
         public Point ToCanvasCoords(Point plotCoords)

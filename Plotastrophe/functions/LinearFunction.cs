@@ -9,7 +9,7 @@ namespace Plotastrophe.functions
 {
     class LinearFunction : PlotFunction
     {
-        public LinearFunction(Func<Point, Point> transform) : base(transform)
+        public LinearFunction(PlotCanvas canvas) : base(canvas)
         {
         }
 

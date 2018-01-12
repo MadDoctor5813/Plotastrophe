@@ -23,16 +23,35 @@ namespace Plotastrophe.functions
 
         private const double DX = 0.1;
 
-        private Func<Point, Point> transform;
+        PlotCanvas canvas;
 
-        public PlotFunction(Func<Point, Point> transform)
+        public PlotFunction(PlotCanvas canvas)
         {
             Polyline = new Polyline();
-            this.transform = transform;
+            this.canvas = canvas;
             //basic appearance for now
-            Polyline.Stroke = System.Windows.Media.Brushes.Bisque;
-            Polyline.StrokeThickness = 2;
+            Polyline.Stroke = System.Windows.Media.Brushes.Blue;
+            Polyline.StrokeThickness = 5;
+            //setup events
+            Polyline.MouseLeftButtonDown += OnClick;
             RegenShape();
+        }
+
+        public void SetSelected(bool selected)
+        {
+            if (selected)
+            {
+                Polyline.Stroke = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                Polyline.Stroke = System.Windows.Media.Brushes.Blue;
+            }
+        }
+
+        private void OnClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            canvas.Select(this);
         }
 
         protected abstract double Evaluate(double x);
@@ -42,7 +61,7 @@ namespace Plotastrophe.functions
             Polyline.Points.Clear();
             for (double i = Start; i < End; i += DX)
             {
-                Polyline.Points.Add(transform(new Point(i, Evaluate(i))));
+                Polyline.Points.Add(canvas.ToCanvasCoords(new Point(i, Evaluate(i))));
             }
         }
 
