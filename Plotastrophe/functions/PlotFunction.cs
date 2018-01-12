@@ -52,6 +52,7 @@ namespace Plotastrophe.functions
         private void OnClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             canvas.Select(this);
+            e.Handled = true;
         }
 
         protected abstract double Evaluate(double x);

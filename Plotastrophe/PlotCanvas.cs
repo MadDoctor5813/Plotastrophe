@@ -24,6 +24,7 @@ namespace Plotastrophe
         public PlotCanvas(Canvas canvas)
         {
             mCanvas = canvas;
+            canvas.MouseLeftButtonDown += CanvasOnClick;
             functions = new List<PlotFunction>();
             LinearFunction l1 = new LinearFunction(this);
             LinearFunction l2 = new LinearFunction(this);
@@ -44,6 +45,17 @@ namespace Plotastrophe
             func.SetSelected(true);
             selected?.SetSelected(false);
             selected = func;
+        }
+
+        private void CanvasOnClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Deselect();
+        }
+
+        public void Deselect()
+        {
+            selected?.SetSelected(false);
+            selected = null;
         }
 
         public Point ToCanvasCoords(Point plotCoords)
