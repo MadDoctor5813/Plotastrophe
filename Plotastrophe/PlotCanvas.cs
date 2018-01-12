@@ -29,7 +29,7 @@ namespace Plotastrophe
 
         private const double PLOT_SIZE = 100;
 
-        private const double TRANSLATE_STEP = 5;
+        private const double TRANSLATE_STEP = 1;
         private const double SCALE_STEP = 0.1;
         private const double RESTRICT_STEP = 1;
 
