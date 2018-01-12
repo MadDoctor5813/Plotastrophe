@@ -36,22 +36,30 @@ namespace Plotastrophe
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.None;
                 selectModeText.Text = "Selection Mode: None";
             }
-            if (e.Key == Key.T)
+            else if (e.Key == Key.T)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.Translate;
                 selectModeText.Text = "Selection Mode: Translate";
             }
-            if (e.Key == Key.S)
+            else if (e.Key == Key.S)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.Scale;
                 selectModeText.Text = "Selection Mode: Scale";
             }
-            if (e.Key == Key.R)
+            else if (e.Key == Key.Z)
             {
-                plotCanvas.SelectMode = PlotCanvas.SelectionState.Restrictions;
-                selectModeText.Text = "Selection Mode: Restrictions";
+                plotCanvas.SelectMode = PlotCanvas.SelectionState.Start;
+                selectModeText.Text = "Selection Mode: Start";
+            }
+            else if (e.Key == Key.X)
+            {
+                plotCanvas.SelectMode = PlotCanvas.SelectionState.End;
+                selectModeText.Text = "Selection Mode: End";
+            }
+            else
+            {
+                plotCanvas.HandleKey(e.Key);
             }
         }
-
     }
 }

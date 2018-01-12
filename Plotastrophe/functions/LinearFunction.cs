@@ -15,7 +15,7 @@ namespace Plotastrophe.functions
 
         protected override double Evaluate(double x)
         {
-            return (((x + D) * K) * A) + C;
+            return (Math.Sin((x + D) * K) * A) + C;
         }
     }
 }

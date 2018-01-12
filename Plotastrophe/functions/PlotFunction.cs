@@ -16,12 +16,12 @@ namespace Plotastrophe.functions
         public double K { get; set; } = 1;
         public double D { get; set; } = 0;
 
-        public double Start { get; set; } = -1000;
-        public double End { get; set; } = 1000;
+        public double Start { get; set; } = -100;
+        public double End { get; set; } = 100;
 
         public Polyline Polyline { get; }
 
-        private const double DX = 0.1;
+        private const double DX = 0.5;
 
         PlotCanvas canvas;
 

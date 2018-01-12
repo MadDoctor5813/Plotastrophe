@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using System.Windows.Input;
 
 namespace Plotastrophe
 {
@@ -20,12 +21,17 @@ namespace Plotastrophe
             None,
             Translate,
             Scale,
-            Restrictions
+            Start,
+            End
         }
 
         private Canvas mCanvas;
 
         private const double PLOT_SIZE = 100;
+
+        private const double TRANSLATE_STEP = 5;
+        private const double SCALE_STEP = 0.1;
+        private const double RESTRICT_STEP = 1;
 
         private List<PlotFunction> functions;
 
@@ -43,6 +49,98 @@ namespace Plotastrophe
             l2.RegenShape();
             AddFunction(l1);
             AddFunction(l2);
+        }
+
+        public void HandleKey(Key key)
+        {
+            if (selected != null)
+            {
+                switch (SelectMode)
+                {
+                    case SelectionState.Translate:
+                        HandleKeyTranslate(key);
+                        break;
+                    case SelectionState.Scale:
+                        HandleKeyScale(key);
+                        break;
+                    case SelectionState.Start:
+                        HandleKeyStart(key);
+                        break;
+                    case SelectionState.End:
+                        HandleKeyEnd(key);
+                        break;
+                }
+            }
+        }
+
+
+        private void HandleKeyTranslate(Key key)
+        {
+            if (key == Key.Left)
+            {
+                selected.D -= TRANSLATE_STEP;
+            }
+            else if (key == Key.Right)
+            {
+                selected.D += TRANSLATE_STEP;
+            }
+            else if (key == Key.Up)
+            {
+                selected.C += TRANSLATE_STEP;
+            }
+            else if (key == Key.Down)
+            {
+                selected.C -= TRANSLATE_STEP;
+            }
+            selected.RegenShape();
+        }
+
+
+        private void HandleKeyScale(Key key)
+        {
+            if (key == Key.Left)
+            {
+                selected.K -= SCALE_STEP;
+            }
+            if (key == Key.Right)
+            {
+                selected.K += SCALE_STEP;
+            }
+            if (key == Key.Up)
+            {
+                selected.A += SCALE_STEP;
+            }
+            if (key == Key.Down)
+            {
+                selected.A -= SCALE_STEP;
+            }
+            selected.RegenShape();
+        }
+
+        private void HandleKeyStart(Key key)
+        {
+            if (key == Key.Left)
+            {
+                selected.Start -= RESTRICT_STEP;
+            }
+            if (key == Key.Right)
+            {
+                selected.Start += RESTRICT_STEP;
+            }
+            selected.RegenShape();
+        }
+
+        private void HandleKeyEnd(Key key)
+        {
+            if (key == Key.Left)
+            {
+                selected.End -= RESTRICT_STEP;
+            }
+            if (key == Key.Right)
+            {
+                selected.End += RESTRICT_STEP;
+            }
+            selected.RegenShape();
         }
 
         private void AddFunction(PlotFunction function)
