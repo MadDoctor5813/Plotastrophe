@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Plotastrophe"
         mc:Ignorable="d"
-        Title="Plotastrophe" Height="1024" Width="1024">
+        Title="Plotastrophe" Height="850" Width="1024">
     <DockPanel>
         <ListView DockPanel.Dock="Left" Name="buttonList">
         </ListView>
