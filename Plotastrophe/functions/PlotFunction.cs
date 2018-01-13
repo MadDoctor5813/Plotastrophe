@@ -17,12 +17,12 @@ namespace Plotastrophe.functions
         public double K { get; set; } = 1;
         public double D { get; set; } = 0;
 
-        public double Start { get; set; } = -100;
-        public double End { get; set; } = 100;
+        public double Start { get; set; } = -50;
+        public double End { get; set; } = 50;
 
         public Path PlotPath { get; }
 
-        private const double DX = 0.5;
+        private const double DX = 0.01;
 
         PlotCanvas canvas;
 
@@ -70,20 +70,29 @@ namespace Plotastrophe.functions
 
         public void RegenShape()
         {
+            //find first valid start location
+            double validStart = Start;
+            for (; validStart < End; validStart += DX)
+            {
+                if (IsValidDouble(Evaluate(validStart)))
+                {
+                    break;
+                }
+            }
             PathFigure figure = new PathFigure();
-            figure.StartPoint = new Point(Start, Evaluate(Start));
+            figure.StartPoint = canvas.ToCanvasCoords(new Point(validStart, Evaluate(validStart)));
             PathGeometry geo = new PathGeometry();
-            for (double i = Start; i < End; i += DX)
+            for (double i = validStart; i < End; i += DX)
             {   
                 double result = Evaluate(i);
-                if (result != double.NaN && result != double.PositiveInfinity && result != double.NegativeInfinity)
+                if (IsValidDouble(result))
                 {
                     if (IsAsymptote(i - DX, i))
                     {
                         //create a new path figure
                         geo.Figures.Add(figure);
                         figure = new PathFigure();
-                        figure.StartPoint = canvas.ToCanvasCoords(new Point(i, result));
+                        figure.StartPoint = canvas.ToCanvasCoords(new Point(i + DX, Evaluate(i + DX)));
                     }
                     LineSegment segment = new LineSegment();
                     segment.Point = canvas.ToCanvasCoords(new Point(i, result));
@@ -104,6 +113,11 @@ namespace Plotastrophe.functions
                 }
             }
             return false;
+        }
+
+        private bool IsValidDouble(double x)
+        {
+            return !(double.IsNaN(x) || double.IsInfinity(x));
         }
     }
 }
