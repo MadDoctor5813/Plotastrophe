@@ -9,6 +9,10 @@
     <DockPanel>
         <ListView DockPanel.Dock="Left" Name="buttonList">
         </ListView>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Save" Click="SaveClick"></MenuItem>
+            <MenuItem Header="Open" Click="OpenClick"></MenuItem>
+        </Menu>
         <Border Name="canvasBorder" DockPanel.Dock="Top" BorderBrush="Bisque" BorderThickness="2" Height="750" Width="750" VerticalAlignment="Top">
             <Canvas Height="750" Width="750" Name="canvas" Background="White" ClipToBounds="True" Focusable="True"></Canvas>
         </Border>

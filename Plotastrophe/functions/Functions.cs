@@ -7,6 +7,7 @@ using System.Windows;
 
 namespace Plotastrophe.functions
 {
+    [Serializable]
     class LinearFunction : PlotFunction
     {
 
@@ -16,6 +17,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class QuarticFunction : PlotFunction
     {
 
@@ -25,6 +27,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class QuinticFunction : PlotFunction
     {
 
@@ -34,6 +37,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class Reciprocal : PlotFunction
     {
 
@@ -48,6 +52,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class ExponentialFunction : PlotFunction
     {
 
@@ -57,6 +62,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class LogarithmicFunction : PlotFunction
     {
 
@@ -71,6 +77,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class SinFunction : PlotFunction
     {
 
@@ -80,6 +87,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class CosFunction : PlotFunction
     {
 
@@ -89,6 +97,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class TanFunction : PlotFunction
     {
 
@@ -112,6 +121,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class SecFunction : PlotFunction
     {
 
@@ -135,6 +145,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class CscFunction : PlotFunction
     {
 
@@ -158,6 +169,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class CotFunction : PlotFunction
     {
 
@@ -181,6 +193,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class QuadraticFunction : PlotFunction
     {
 
@@ -190,6 +203,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class SquareRootFunction : PlotFunction
     {
 
@@ -199,6 +213,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class CubicFunction : PlotFunction
     {
 
@@ -208,6 +223,7 @@ namespace Plotastrophe.functions
         }
     }
 
+    [Serializable]
     class RationalFunction : PlotFunction
     {
 

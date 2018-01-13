@@ -34,7 +34,7 @@ namespace Plotastrophe
         private const double SCALE_STEP = 0.01;
         private const double RESTRICT_STEP = 0.1;
 
-        private List<PlotFunction> functions;
+        public List<PlotFunction> Functions { get; set; }
 
         public SelectionState SelectMode { get; set; } = SelectionState.None;
         private PlotFunction selected = null;
@@ -44,7 +44,7 @@ namespace Plotastrophe
             this.window = window;
             mCanvas = canvas;
             canvas.MouseLeftButtonDown += CanvasOnClick;
-            functions = new List<PlotFunction>();
+            Functions = new List<PlotFunction>();
         }
 
         public bool HandleKey(Key key)
@@ -175,7 +175,7 @@ namespace Plotastrophe
 
         public void AddFunction(PlotFunction function)
         {
-            functions.Add(function);
+            Functions.Add(function);
             mCanvas.Children.Add(function.PlotPath);
             mCanvas.InvalidateVisual();
         }
@@ -203,8 +203,17 @@ namespace Plotastrophe
         public void DeleteSelected()
         {
             mCanvas.Children.Remove(selected.PlotPath);
-            functions.Remove(selected);
+            Functions.Remove(selected);
             selected = null;
+        }
+
+        public void ClearAllFunctions()
+        {
+            foreach (var func in Functions)
+            {
+                mCanvas.Children.Remove(func.PlotPath);
+            }
+            Functions.Clear();
         }
 
         public Point ToCanvasCoords(Point plotCoords)

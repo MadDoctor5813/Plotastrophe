@@ -1,7 +1,10 @@
-﻿using Plotastrophe.functions;
+﻿using Microsoft.Win32;
+using Plotastrophe.functions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -162,6 +165,47 @@ namespace Plotastrophe
             func.RegenShape();
             plotCanvas.AddFunction(func);
             canvas.Focus();
+        }
+
+        private void SaveClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "Plot file (*.plot)|*.plot";
+            bool? result = dlg.ShowDialog();
+            if (result == true)
+            {
+                using (FileStream file = File.OpenWrite(dlg.FileName))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(file, plotCanvas.Functions);
+                }
+            }
+        }
+
+        private void OpenClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Plot file (*.plot)|*.plot";
+            bool? result = dlg.ShowDialog();
+            List<PlotFunction> funcs = null;
+            if (result == true)
+            {
+                using (FileStream file = File.OpenRead(dlg.FileName))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    funcs = (formatter.Deserialize(file) as List<PlotFunction>);
+                }
+            }
+            if (funcs != null)
+            {
+                plotCanvas.ClearAllFunctions();
+                foreach (var func in funcs)
+                {
+                    func.Canvas = plotCanvas;
+                    func.RegenShape();
+                    plotCanvas.AddFunction(func);
+                }
+            }
         }
     }
 }

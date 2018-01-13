@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,9 +10,9 @@ using System.Windows.Shapes;
 
 namespace Plotastrophe.functions
 {
+    [Serializable]
     public abstract class PlotFunction
     {
-
         public double A { get; set; } = 1;
         public double C { get; set; } = 0;
         public double K { get; set; } = 1;
@@ -20,13 +21,48 @@ namespace Plotastrophe.functions
         public double Start { get; set; } = -50;
         public double End { get; set; } = 50;
 
-        public Path PlotPath { get; }
+        [NonSerialized]
+        private Path _plotPath;
+        public Path PlotPath
+        {
+            get
+            {
+                return _plotPath;
+            }
+            set
+            {
+                _plotPath = value;
+            }
+        }
 
         private const double DX = 0.01;
 
-        public PlotCanvas Canvas { get; set; }
+        [NonSerialized]
+        private PlotCanvas _canvas;
+        public PlotCanvas Canvas
+        {
+            get
+            {
+                return _canvas;
+            }
+            set
+            {
+                _canvas = value;
+            }
+        }
 
         public PlotFunction()
+        {
+            InitPlotPath();
+        }
+
+        [OnDeserialized]
+        public void OnDeserialized(StreamingContext c)
+        {
+            InitPlotPath();
+        }
+
+        private void InitPlotPath()
         {
             PlotPath = new Path();
             //basic appearance for now
