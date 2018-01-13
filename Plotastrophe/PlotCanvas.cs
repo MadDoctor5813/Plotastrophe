@@ -144,6 +144,7 @@ namespace Plotastrophe
         {
             functions.Add(function);
             mCanvas.Children.Add(function.PlotPath);
+            mCanvas.InvalidateVisual();
         }
 
         public void Select(PlotFunction func)
