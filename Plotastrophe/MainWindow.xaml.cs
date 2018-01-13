@@ -33,35 +33,46 @@ namespace Plotastrophe
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            e.Handled = HandleKey(e.Key);
+            if (!e.Handled)
+            {
+                e.Handled = plotCanvas.HandleKey(e.Key);
+            }
+        }
+
+        private bool HandleKey(Key key)
+        {
+            if (key == Key.Escape)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.None;
                 selectModeText.Text = "Selection Mode: None";
+                return true;
             }
-            else if (e.Key == Key.T)
+            else if (key == Key.T)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.Translate;
                 selectModeText.Text = "Selection Mode: Translate";
+                return true;
             }
-            else if (e.Key == Key.S)
+            else if (key == Key.S)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.Scale;
                 selectModeText.Text = "Selection Mode: Scale";
+                return true;
             }
-            else if (e.Key == Key.Z)
+            else if (key == Key.Z)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.Start;
                 selectModeText.Text = "Selection Mode: Start";
+                return true;
             }
-            else if (e.Key == Key.X)
+            else if (key == Key.X)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.End;
                 selectModeText.Text = "Selection Mode: End";
+                return true;
             }
-            else
-            {
-                plotCanvas.HandleKey(e.Key);
-            }
+            return false;
         }
 
         private void CreateFunctionButtons()

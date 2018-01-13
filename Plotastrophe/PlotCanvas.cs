@@ -48,96 +48,125 @@ namespace Plotastrophe
             AddFunction(l1);
         }
 
-        public void HandleKey(Key key)
+        public bool HandleKey(Key key)
         {
             if (selected != null)
             {
                 switch (SelectMode)
                 {
                     case SelectionState.Translate:
-                        HandleKeyTranslate(key);
-                        break;
+                        return HandleKeyTranslate(key);
                     case SelectionState.Scale:
-                        HandleKeyScale(key);
-                        break;
+                        return HandleKeyScale(key);
                     case SelectionState.Start:
-                        HandleKeyStart(key);
-                        break;
+                        return HandleKeyStart(key);
                     case SelectionState.End:
-                        HandleKeyEnd(key);
-                        break;
+                        return HandleKeyEnd(key);
                 }
             }
+            return false;
         }
 
 
-        private void HandleKeyTranslate(Key key)
+        private bool HandleKeyTranslate(Key key)
         {
+            bool handled = false;
             if (key == Key.Left)
             {
                 selected.D += TRANSLATE_STEP;
+                handled = true;
             }
             else if (key == Key.Right)
             {
                 selected.D -= TRANSLATE_STEP;
+                handled = true;
             }
             else if (key == Key.Up)
             {
                 selected.C += TRANSLATE_STEP;
+                handled = true;
             }
             else if (key == Key.Down)
             {
                 selected.C -= TRANSLATE_STEP;
+                handled = true;
             }
-            selected.RegenShape();
+            if (handled)
+            {
+                selected.RegenShape();
+            }
+            return handled;
         }
 
 
-        private void HandleKeyScale(Key key)
+        private bool HandleKeyScale(Key key)
         {
+            bool handled = false;
             if (key == Key.Left)
             {
                 selected.K -= SCALE_STEP;
+                handled = true;
             }
             if (key == Key.Right)
             {
                 selected.K += SCALE_STEP;
+                handled = true;
             }
             if (key == Key.Up)
             {
                 selected.A += SCALE_STEP;
+                handled = true;
             }
             if (key == Key.Down)
             {
                 selected.A -= SCALE_STEP;
+                handled = true;
             }
-            selected.RegenShape();
+            if (handled)
+            {
+                selected.RegenShape();
+            }
+            return handled;
         }
 
-        private void HandleKeyStart(Key key)
+        private bool HandleKeyStart(Key key)
         {
+            bool handled = false;
             if (key == Key.Left)
             {
                 selected.Start -= RESTRICT_STEP;
+                handled = true;
             }
             if (key == Key.Right)
             {
                 selected.Start += RESTRICT_STEP;
+                handled = true;
             }
-            selected.RegenShape();
+            if (handled)
+            {
+                selected.RegenShape();
+            }
+            return handled;
         }
 
-        private void HandleKeyEnd(Key key)
+        private bool HandleKeyEnd(Key key)
         {
+            bool handled = true;
             if (key == Key.Left)
             {
                 selected.End -= RESTRICT_STEP;
+                handled = true;
             }
             if (key == Key.Right)
             {
                 selected.End += RESTRICT_STEP;
+                handled = true;
             }
-            selected.RegenShape();
+            if (handled)
+            {
+                selected.RegenShape();
+            }
+            return handled;
         }
 
         public void AddFunction(PlotFunction function)
