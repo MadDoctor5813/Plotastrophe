@@ -45,9 +45,6 @@ namespace Plotastrophe
             mCanvas = canvas;
             canvas.MouseLeftButtonDown += CanvasOnClick;
             functions = new List<PlotFunction>();
-            SquareRootFunction l1 = new SquareRootFunction() { Canvas = this };
-            l1.RegenShape();
-            AddFunction(l1);
         }
 
         public bool HandleKey(Key key)
