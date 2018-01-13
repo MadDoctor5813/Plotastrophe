@@ -72,6 +72,11 @@ namespace Plotastrophe
                 selectModeText.Text = "Selection Mode: End";
                 return true;
             }
+            else if (key == Key.Delete)
+            {
+                plotCanvas.DeleteSelected();
+                return true;
+            }
             return false;
         }
 

@@ -194,6 +194,13 @@ namespace Plotastrophe
             selected = null;
         }
 
+        public void DeleteSelected()
+        {
+            mCanvas.Children.Remove(selected.PlotPath);
+            functions.Remove(selected);
+            selected = null;
+        }
+
         public Point ToCanvasCoords(Point plotCoords)
         {
             double canvasX;
