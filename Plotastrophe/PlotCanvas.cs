@@ -13,7 +13,7 @@ namespace Plotastrophe
 {
 
 
-    class PlotCanvas
+    public class PlotCanvas
     {
 
         public enum SelectionState
@@ -43,12 +43,9 @@ namespace Plotastrophe
             mCanvas = canvas;
             canvas.MouseLeftButtonDown += CanvasOnClick;
             functions = new List<PlotFunction>();
-            LinearFunction l1 = new LinearFunction(this);
-            LinearFunction l2 = new LinearFunction(this);
-            l2.A = 3;
-            l2.RegenShape();
+            SquareRootFunction l1 = new SquareRootFunction() { Canvas = this };
+            l1.RegenShape();
             AddFunction(l1);
-            AddFunction(l2);
         }
 
         public void HandleKey(Key key)

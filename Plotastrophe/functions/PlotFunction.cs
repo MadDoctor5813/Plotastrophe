@@ -9,7 +9,7 @@ using System.Windows.Shapes;
 
 namespace Plotastrophe.functions
 {
-    abstract class PlotFunction
+    public abstract class PlotFunction
     {
 
         public double A { get; set; } = 1;
