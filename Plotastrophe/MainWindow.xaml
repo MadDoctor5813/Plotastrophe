@@ -14,7 +14,7 @@
         </Border>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <TextBlock Name="selectModeText" FontSize="20" Text="Selection Mode: None"/>
+                <TextBlock Name="selectModeText"/>
             </StatusBarItem>
         </StatusBar>
     </DockPanel>

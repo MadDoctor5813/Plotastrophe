@@ -25,6 +25,7 @@ namespace Plotastrophe
             End
         }
 
+        private MainWindow window;
         private Canvas mCanvas;
 
         private const double PLOT_SIZE = 100;
@@ -38,8 +39,9 @@ namespace Plotastrophe
         public SelectionState SelectMode { get; set; } = SelectionState.None;
         private PlotFunction selected = null;
 
-        public PlotCanvas(Canvas canvas)
+        public PlotCanvas(MainWindow window, Canvas canvas)
         {
+            this.window = window;
             mCanvas = canvas;
             canvas.MouseLeftButtonDown += CanvasOnClick;
             functions = new List<PlotFunction>();
@@ -50,6 +52,7 @@ namespace Plotastrophe
 
         public bool HandleKey(Key key)
         {
+            window.UpdateFuncInfo(selected);
             if (selected != null)
             {
                 switch (SelectMode)
@@ -181,6 +184,7 @@ namespace Plotastrophe
             func.SetSelected(true);
             selected?.SetSelected(false);
             selected = func;
+            window.UpdateFuncInfo(selected);
         }
 
         private void CanvasOnClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -192,6 +196,7 @@ namespace Plotastrophe
         {
             selected?.SetSelected(false);
             selected = null;
+            window.UpdateFuncInfo(selected);
         }
 
         public void DeleteSelected()

@@ -24,11 +24,57 @@ namespace Plotastrophe
 
         PlotCanvas plotCanvas;
 
+        private string _selectText = "Selection Mode: None";
+        private string SelectText
+        {
+            get
+            {
+                return _selectText;
+            }
+            set
+            {
+                _selectText = value;
+                UpdateStatus();
+            }
+        }
+
+        private string _infoText;
+        private string InfoText
+        {
+            get
+            {
+                return _infoText;
+            }
+            set
+            {
+                _infoText = value;
+                UpdateStatus();
+            }
+        }
+
+        private void UpdateStatus()
+        {
+            selectModeText.Text = _selectText + _infoText;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            plotCanvas = new PlotCanvas(canvas);
+            plotCanvas = new PlotCanvas(this, canvas);
             CreateFunctionButtons();
+            UpdateStatus();
+        }
+
+        public void UpdateFuncInfo(PlotFunction func)
+        {
+            if (func == null)
+            {
+                InfoText = "";
+            }
+            else
+            {
+                InfoText = $" | {func.GetType().ToString()}: A: {func.A} C: {func.C} K: {func.K} D: {func.D} Start: {func.Start} End: {func.End}";
+            }
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -45,31 +91,31 @@ namespace Plotastrophe
             if (key == Key.Escape)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.None;
-                selectModeText.Text = "Selection Mode: None";
+                SelectText = "Selection Mode: None";
                 return true;
             }
             else if (key == Key.T)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.Translate;
-                selectModeText.Text = "Selection Mode: Translate";
+                SelectText = "Selection Mode: Translate";
                 return true;
             }
             else if (key == Key.S)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.Scale;
-                selectModeText.Text = "Selection Mode: Scale";
+                SelectText = "Selection Mode: Scale";
                 return true;
             }
             else if (key == Key.Z)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.Start;
-                selectModeText.Text = "Selection Mode: Start";
+                SelectText = "Selection Mode: Start";
                 return true;
             }
             else if (key == Key.X)
             {
                 plotCanvas.SelectMode = PlotCanvas.SelectionState.End;
-                selectModeText.Text = "Selection Mode: End";
+                SelectText = "Selection Mode: End";
                 return true;
             }
             else if (key == Key.Delete)
