@@ -73,7 +73,7 @@ namespace Plotastrophe
             }
             else
             {
-                InfoText = $" | {func.GetType().ToString()}: A: {func.A} C: {func.C} K: {func.K} D: {func.D} Start: {func.Start} End: {func.End}";
+                InfoText = $" | {func.GetType().ToString()}: A: {func.A:0.####} C: {func.C:0.####} K: {func.K:0.####} D: {func.D:0.####} Start: {func.Start:0.####} End: {func.End:0.####}";
             }
         }
 
