@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plotastrophe.functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace Plotastrophe
         {
             InitializeComponent();
             plotCanvas = new PlotCanvas(canvas);
+            CreateFunctionButtons();
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -60,6 +62,35 @@ namespace Plotastrophe
             {
                 plotCanvas.HandleKey(e.Key);
             }
+        }
+
+        private void CreateFunctionButtons()
+        {
+            AddFunctionButton<LinearFunction>();
+            AddFunctionButton<QuarticFunction>();
+            AddFunctionButton<QuinticFunction>();
+            AddFunctionButton<Reciprocal>();
+            AddFunctionButton<ExponentialFunction>();
+            AddFunctionButton<LogarithmicFunction>();
+            AddFunctionButton<SinFunction>();
+            AddFunctionButton<CosFunction>();
+            AddFunctionButton<TanFunction>();
+            AddFunctionButton<SecFunction>();
+            AddFunctionButton<CscFunction>();
+            AddFunctionButton<CotFunction>();
+            AddFunctionButton<QuadraticFunction>();
+            AddFunctionButton<SquareRootFunction>();
+            AddFunctionButton<CubicFunction>();
+            AddFunctionButton<RationalFunction>();
+        }
+
+        private void AddFunctionButton<T>() where T : PlotFunction, new()
+        {
+            ListViewItem item = new ListViewItem();
+            FunctionButton<T> button = new FunctionButton<T>(plotCanvas);
+            button.Content = new TextBlock() { Text = typeof(T).ToString() };
+            item.Content = button;
+            buttonList.Items.Add(item);
         }
     }
 }

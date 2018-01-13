@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="Plotastrophe" Height="1024" Width="1024">
     <DockPanel>
-        <Border DockPanel.Dock="Top" Name="canvasBorder" BorderBrush="Bisque" BorderThickness="2" Height="750" Width="750" VerticalAlignment="Top">
+        <ListView DockPanel.Dock="Left" Name="buttonList">
+        </ListView>
+        <Border Name="canvasBorder" DockPanel.Dock="Top" BorderBrush="Bisque" BorderThickness="2" Height="750" Width="750" VerticalAlignment="Top">
             <Canvas Height="750" Width="750" Name="canvas" Background="White" ClipToBounds="True"></Canvas>
         </Border>
         <StatusBar DockPanel.Dock="Bottom">
