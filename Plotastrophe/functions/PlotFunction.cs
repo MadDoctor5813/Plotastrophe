@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Plotastrophe.functions
@@ -19,7 +20,7 @@ namespace Plotastrophe.functions
         public double Start { get; set; } = -100;
         public double End { get; set; } = 100;
 
-        public Polyline Polyline { get; }
+        public Path PlotPath { get; }
 
         private const double DX = 0.5;
 
@@ -27,13 +28,13 @@ namespace Plotastrophe.functions
 
         public PlotFunction(PlotCanvas canvas)
         {
-            Polyline = new Polyline();
+            PlotPath = new Path();
             this.canvas = canvas;
             //basic appearance for now
-            Polyline.Stroke = System.Windows.Media.Brushes.Blue;
-            Polyline.StrokeThickness = 5;
+            PlotPath.Stroke = System.Windows.Media.Brushes.Blue;
+            PlotPath.StrokeThickness = 5;
             //setup events
-            Polyline.MouseLeftButtonDown += OnClick;
+            PlotPath.MouseLeftButtonDown += OnClick;
             RegenShape();
         }
 
@@ -41,11 +42,11 @@ namespace Plotastrophe.functions
         {
             if (selected)
             {
-                Polyline.Stroke = System.Windows.Media.Brushes.Red;
+                PlotPath.Stroke = System.Windows.Media.Brushes.Red;
             }
             else
             {
-                Polyline.Stroke = System.Windows.Media.Brushes.Blue;
+                PlotPath.Stroke = System.Windows.Media.Brushes.Blue;
             }
         }
 
@@ -64,11 +65,21 @@ namespace Plotastrophe.functions
 
         public void RegenShape()
         {
-            Polyline.Points.Clear();
+            PathFigure figure = new PathFigure();
+            figure.StartPoint = new Point(Start, Evaluate(Start));
             for (double i = Start; i < End; i += DX)
             {
-                Polyline.Points.Add(canvas.ToCanvasCoords(new Point(i, Evaluate(i))));
+                double result = Evaluate(i);
+                if (result != double.NaN && result != double.PositiveInfinity && result != double.NegativeInfinity)
+                {
+                    LineSegment segment = new LineSegment();
+                    segment.Point = canvas.ToCanvasCoords(new Point(i, result));
+                    figure.Segments.Add(segment);
+                }
             }
+            PathGeometry geo = new PathGeometry();
+            geo.Figures.Add(figure);
+            PlotPath.Data = geo;
         }
 
     }

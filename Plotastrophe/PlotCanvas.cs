@@ -146,7 +146,7 @@ namespace Plotastrophe
         private void AddFunction(PlotFunction function)
         {
             functions.Add(function);
-            mCanvas.Children.Add(function.Polyline);
+            mCanvas.Children.Add(function.PlotPath);
         }
 
         public void Select(PlotFunction func)
