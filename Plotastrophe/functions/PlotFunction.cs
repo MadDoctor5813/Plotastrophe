@@ -24,18 +24,16 @@ namespace Plotastrophe.functions
 
         private const double DX = 0.01;
 
-        PlotCanvas canvas;
+        public PlotCanvas Canvas { get; set; }
 
-        public PlotFunction(PlotCanvas canvas)
+        public PlotFunction()
         {
             PlotPath = new Path();
-            this.canvas = canvas;
             //basic appearance for now
             PlotPath.Stroke = System.Windows.Media.Brushes.Blue;
             PlotPath.StrokeThickness = 5;
             //setup events
             PlotPath.MouseLeftButtonDown += OnClick;
-            RegenShape();
         }
 
         public void SetSelected(bool selected)
@@ -52,7 +50,7 @@ namespace Plotastrophe.functions
 
         private void OnClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            canvas.Select(this);
+            Canvas.Select(this);
             e.Handled = true;
         }
 
@@ -80,7 +78,7 @@ namespace Plotastrophe.functions
                 }
             }
             PathFigure figure = new PathFigure();
-            figure.StartPoint = canvas.ToCanvasCoords(new Point(validStart, Evaluate(validStart)));
+            figure.StartPoint = Canvas.ToCanvasCoords(new Point(validStart, Evaluate(validStart)));
             PathGeometry geo = new PathGeometry();
             for (double i = validStart; i < End; i += DX)
             {   
@@ -92,10 +90,10 @@ namespace Plotastrophe.functions
                         //create a new path figure
                         geo.Figures.Add(figure);
                         figure = new PathFigure();
-                        figure.StartPoint = canvas.ToCanvasCoords(new Point(i + DX, Evaluate(i + DX)));
+                        figure.StartPoint = Canvas.ToCanvasCoords(new Point(i + DX, Evaluate(i + DX)));
                     }
                     LineSegment segment = new LineSegment();
-                    segment.Point = canvas.ToCanvasCoords(new Point(i, result));
+                    segment.Point = Canvas.ToCanvasCoords(new Point(i, result));
                     figure.Segments.Add(segment);
                 }
             }

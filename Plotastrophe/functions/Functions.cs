@@ -9,9 +9,6 @@ namespace Plotastrophe.functions
 {
     class LinearFunction : PlotFunction
     {
-        public LinearFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -21,9 +18,6 @@ namespace Plotastrophe.functions
 
     class QuarticFunction : PlotFunction
     {
-        public QuarticFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -33,9 +27,6 @@ namespace Plotastrophe.functions
 
     class QuinticFunction : PlotFunction
     {
-        public QuinticFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -45,9 +36,6 @@ namespace Plotastrophe.functions
 
     class Reciprocal : PlotFunction
     {
-        public Reciprocal(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -62,9 +50,6 @@ namespace Plotastrophe.functions
 
     class ExponentialFunction : PlotFunction
     {
-        public ExponentialFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -74,9 +59,6 @@ namespace Plotastrophe.functions
 
     class LogarithmicFunction : PlotFunction
     {
-        public LogarithmicFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -91,9 +73,6 @@ namespace Plotastrophe.functions
 
     class SinFunction : PlotFunction
     {
-        public SinFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -103,9 +82,6 @@ namespace Plotastrophe.functions
 
     class CosFunction : PlotFunction
     {
-        public CosFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -115,9 +91,6 @@ namespace Plotastrophe.functions
 
     class TanFunction : PlotFunction
     {
-        public TanFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -141,9 +114,6 @@ namespace Plotastrophe.functions
 
     class SecFunction : PlotFunction
     {
-        public SecFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -167,9 +137,6 @@ namespace Plotastrophe.functions
 
     class CscFunction : PlotFunction
     {
-        public CscFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -193,9 +160,6 @@ namespace Plotastrophe.functions
 
     class CotFunction : PlotFunction
     {
-        public CotFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -219,9 +183,6 @@ namespace Plotastrophe.functions
 
     class QuadraticFunction : PlotFunction
     {
-        public QuadraticFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -231,9 +192,6 @@ namespace Plotastrophe.functions
 
     class SquareRootFunction : PlotFunction
     {
-        public SquareRootFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -243,9 +201,6 @@ namespace Plotastrophe.functions
 
     class CubicFunction : PlotFunction
     {
-        public CubicFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
@@ -255,9 +210,6 @@ namespace Plotastrophe.functions
 
     class RationalFunction : PlotFunction
     {
-        public RationalFunction(PlotCanvas canvas) : base(canvas)
-        {
-        }
 
         protected override double Parent(double x)
         {
