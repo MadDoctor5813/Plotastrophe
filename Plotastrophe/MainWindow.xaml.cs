@@ -87,10 +87,19 @@ namespace Plotastrophe
         private void AddFunctionButton<T>() where T : PlotFunction, new()
         {
             ListViewItem item = new ListViewItem();
-            FunctionButton<T> button = new FunctionButton<T>(plotCanvas);
+            Button button = new Button();
             button.Content = new TextBlock() { Text = typeof(T).ToString() };
+            button.Click += OnFunctionClick<T>;
             item.Content = button;
             buttonList.Items.Add(item);
+        }
+
+        private void OnFunctionClick<T>(object sender, RoutedEventArgs e) where T : PlotFunction, new()
+        {
+            PlotFunction func = new T() { Canvas = plotCanvas };
+            func.RegenShape();
+            plotCanvas.AddFunction(func);
+            MessageBox.Show(canvas.Focus().ToString());
         }
     }
 }
