@@ -16,11 +16,11 @@ namespace Plotastrophe.functions
             this.canvas = canvas;
         }
 
-        public PlotFunction Create()
+        public void Create()
         {
             PlotFunction func = new T();
             func.RegenShape();
-            return func;
+            canvas.AddFunction(func);
         }
 
 

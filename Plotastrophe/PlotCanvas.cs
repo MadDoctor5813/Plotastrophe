@@ -140,7 +140,7 @@ namespace Plotastrophe
             selected.RegenShape();
         }
 
-        private void AddFunction(PlotFunction function)
+        public void AddFunction(PlotFunction function)
         {
             functions.Add(function);
             mCanvas.Children.Add(function.PlotPath);
