@@ -115,7 +115,7 @@ namespace Plotastrophe
             PlotFunction func = new T() { Canvas = plotCanvas };
             func.RegenShape();
             plotCanvas.AddFunction(func);
-            MessageBox.Show(canvas.Focus().ToString());
+            canvas.Focus();
         }
     }
 }
