@@ -55,7 +55,12 @@ namespace Plotastrophe.functions
             e.Handled = true;
         }
 
-        protected abstract double Evaluate(double x);
+        protected abstract double Parent(double x);
+
+        protected double Evaluate(double x)
+        {
+            return (Parent((x + D) * K) * A) + C;
+        }
 
         public void RegenShape()
         {
