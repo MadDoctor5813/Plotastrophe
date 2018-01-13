@@ -83,7 +83,7 @@ namespace Plotastrophe.functions
             for (double i = validStart; i < End; i += DX)
             {   
                 double result = Evaluate(i);
-                if (IsValidDouble(result))
+                if (IsValidDouble(result) && IsInRange(result))
                 {
                     if (IsAsymptote(i - DX, i))
                     {
@@ -116,6 +116,11 @@ namespace Plotastrophe.functions
         private bool IsValidDouble(double x)
         {
             return !(double.IsNaN(x) || double.IsInfinity(x));
+        }
+
+        private bool IsInRange(double x)
+        {
+            return x < 5000 && x > -5000;
         }
     }
 }
