@@ -78,11 +78,11 @@ namespace Plotastrophe
         {
             if (key == Key.Left)
             {
-                selected.D -= TRANSLATE_STEP;
+                selected.D += TRANSLATE_STEP;
             }
             else if (key == Key.Right)
             {
-                selected.D += TRANSLATE_STEP;
+                selected.D -= TRANSLATE_STEP;
             }
             else if (key == Key.Up)
             {
