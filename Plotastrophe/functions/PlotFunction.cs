@@ -63,24 +63,47 @@ namespace Plotastrophe.functions
             return (Parent((x + D) * K) * A) + C;
         }
 
+        protected virtual double[] Asymptotes()
+        {
+            return new double[0];
+        }
+
         public void RegenShape()
         {
             PathFigure figure = new PathFigure();
             figure.StartPoint = new Point(Start, Evaluate(Start));
+            PathGeometry geo = new PathGeometry();
             for (double i = Start; i < End; i += DX)
-            {
+            {   
                 double result = Evaluate(i);
                 if (result != double.NaN && result != double.PositiveInfinity && result != double.NegativeInfinity)
                 {
+                    if (IsAsymptote(i - DX, i))
+                    {
+                        //create a new path figure
+                        geo.Figures.Add(figure);
+                        figure = new PathFigure();
+                        figure.StartPoint = canvas.ToCanvasCoords(new Point(i, result));
+                    }
                     LineSegment segment = new LineSegment();
                     segment.Point = canvas.ToCanvasCoords(new Point(i, result));
                     figure.Segments.Add(segment);
                 }
             }
-            PathGeometry geo = new PathGeometry();
             geo.Figures.Add(figure);
             PlotPath.Data = geo;
         }
 
+        private bool IsAsymptote(double x1, double x2)
+        {
+            foreach (double asymptote in Asymptotes())
+            {
+                if (x2 >= asymptote && x1 <= asymptote)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

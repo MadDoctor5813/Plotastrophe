@@ -53,6 +53,11 @@ namespace Plotastrophe.functions
         {
             return 1 / x;
         }
+
+        protected override double[] Asymptotes()
+        {
+            return new double[1] { -D };
+        }
     }
 
 }
