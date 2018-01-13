@@ -63,9 +63,9 @@ namespace Plotastrophe.functions
             return (Parent((x + D) * K) * A) + C;
         }
 
-        protected virtual double[] Asymptotes()
+        protected virtual List<double> Asymptotes()
         {
-            return new double[0];
+            return new List<double>();
         }
 
         public void RegenShape()
