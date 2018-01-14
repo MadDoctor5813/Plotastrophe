@@ -109,13 +109,15 @@ namespace Plotastrophe.functions
         protected override List<double> Asymptotes()
         {
             List<double> asymptotes = new List<double>();
-            for (double i = Math.PI / 2; i < End; i += Math.PI)
+            double step = (1 / K) * Math.PI;
+            double first = Math.Ceiling(Start / (step / 2));
+            if (first % 2 == 0)
             {
-                asymptotes.Add(((1 / K) * i) - D);
+                first--;
             }
-            for (double i = -Math.PI / 2; i > Start; i -= Math.PI)
+            for (first *= step / 2; first < End; first += step)
             {
-                asymptotes.Add(((1 / K) * i) - D);
+                asymptotes.Add(first - D);
             }
             return asymptotes;
         }
@@ -133,13 +135,14 @@ namespace Plotastrophe.functions
         protected override List<double> Asymptotes()
         {
             List<double> asymptotes = new List<double>();
-            for (double i = Math.PI / 2; i < End; i += Math.PI)
+            double first = Math.Floor(Start / (Math.PI / 2));
+            if (first % 2 == 0)
             {
-                asymptotes.Add(((1 / K) * i) - D);
+                first--;
             }
-            for (double i = -Math.PI / 2; i > Start; i -= Math.PI)
+            for (first *= Math.PI / 2; first < End; first += Math.PI)
             {
-                asymptotes.Add(((1 / K) * i) - D);
+                asymptotes.Add(((1 / K) * first) - D);
             }
             return asymptotes;
         }

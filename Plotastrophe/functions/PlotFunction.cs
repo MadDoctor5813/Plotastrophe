@@ -70,6 +70,9 @@ namespace Plotastrophe.functions
             PlotPath.StrokeThickness = 5;
             //setup events
             PlotPath.MouseLeftButtonDown += OnClick;
+            APath = new Path();
+            APath.Stroke = Brushes.Green;
+            APath.StrokeThickness = 10;
         }
 
         public void SetSelected(bool selected)
@@ -119,21 +122,35 @@ namespace Plotastrophe.functions
             for (double i = validStart; i < End; i += DX)
             {   
                 double result = Evaluate(i);
-                if (IsValidDouble(result) && IsInRange(result))
+                if (IsValidDouble(result))
                 {
-                    if (IsAsymptote(i - DX, i))
+                    if (IsInRange(result))
                     {
-                        //create a new path figure
-                        geo.Figures.Add(figure);
-                        figure = new PathFigure();
-                        figure.StartPoint = Canvas.ToCanvasCoords(new Point(i + DX, Evaluate(i + DX)));
+                        //if the figure is null
+                        if (figure == null)
+                        {
+                            figure = new PathFigure();
+                            figure.StartPoint = Canvas.ToCanvasCoords(new Point(i + DX, Evaluate(i + DX)));
+                        }
+                        LineSegment segment = new LineSegment();
+                        segment.Point = Canvas.ToCanvasCoords(new Point(i, result));
+                        figure.Segments.Add(segment);
                     }
-                    LineSegment segment = new LineSegment();
-                    segment.Point = Canvas.ToCanvasCoords(new Point(i, result));
-                    figure.Segments.Add(segment);
+                    else
+                    {
+                        //we/re basically approaching infinity create a new path figure
+                        if (figure != null)
+                        {
+                            geo.Figures.Add(figure);
+                            figure = null;
+                        }
+                    }
                 }
             }
-            geo.Figures.Add(figure);
+            if (figure != null)
+            {
+                geo.Figures.Add(figure);
+            }
             PlotPath.Data = geo;
         }
 
@@ -156,7 +173,7 @@ namespace Plotastrophe.functions
 
         private bool IsInRange(double x)
         {
-            return x < 5000 && x > -5000;
+            return x < 200 && x > -200;
         }
     }
 }
